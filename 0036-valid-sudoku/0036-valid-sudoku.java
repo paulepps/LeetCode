@@ -16,7 +16,8 @@ class Solution {
 
                 int sgIndex = (i / 3) * 3 + j / 3;
 
-                if (rows[i][number] || columns[j][number] || subgrids[sgIndex][number]) {
+                if (rows[i][number] || columns[j][number] 
+                    || subgrids[sgIndex][number]) {
                     return false;
                 }
 
