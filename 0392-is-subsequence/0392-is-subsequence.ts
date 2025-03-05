@@ -2,7 +2,7 @@ function isSubsequence(s: string, t: string): boolean {
         let n = s.length;
         let m = t.length;
 
-//        if (n > m) return false;
+        if (n > m) return false;
 
         let i = 0;
         let j = 0;
