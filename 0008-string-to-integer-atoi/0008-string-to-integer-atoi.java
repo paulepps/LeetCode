@@ -2,64 +2,35 @@ class Solution {
     public int myAtoi(String s) {
 
         // Remove leading whitespace 
-        String trimmedStr = s.replaceFirst("^\\s+", "");
+        s = s.replaceFirst("^\\s+", "");
 
-        int len = trimmedStr.length();
+        int len = s.length();
         if (len == 0) return 0;
 
         int i = 0;
-        boolean pos = true;
+        int sign = 1;
 
-        char ch = trimmedStr.charAt(i);
+        char ch = s.charAt(0);
 
         // Check for sign character
-        if (ch == '-' || (ch == '+')) {
-            if (len == 1) return 0;
-            i++;
-
-            if (ch == '-') {
-                pos = false;
-            }
-        }
-
-        int digits = 0;
-
-        // Skip leading zeros
-        while (i < len && trimmedStr.charAt(i) == '0') {
+        if (ch == '+' || ch == '-') {
+            sign = ch == '+' ? 1 : -1;
             i++;
         }
 
-        if (i == len) return 0;
-
-        StringBuilder result = new StringBuilder();
-
+        long result = 0;
         while (i < len) {
-            ch = trimmedStr.charAt(i);
-            if (Character.isDigit(ch)) {
-                result.append(ch);
-                digits++;
-                i++;
-            } else {
+            ch = s.charAt(i);
+            if (!Character.isDigit(ch)) {
                 break;
-            } 
+            }
+
+            result = result * 10 + (ch - '0');
+            if (result * sign > Integer.MAX_VALUE) return Integer.MAX_VALUE;
+            if (result * sign < Integer.MIN_VALUE) return Integer.MIN_VALUE;
+            i++;
         }
 
-        if (digits == 0) return 0;
-
-        String strNum = result.toString();
-
-        // Value might be too big for a long variable
-        if (strNum.length() > 10) {
-            return (pos) ? Integer.MAX_VALUE : Integer.MIN_VALUE;
-        }
-
-        long finalNum = Long.parseLong(strNum);
-
-        if (!pos) finalNum *= -1;
-
-        // Rounding
-        if (finalNum < Integer.MIN_VALUE) return Integer.MIN_VALUE; 
-        if (finalNum > Integer.MAX_VALUE) return Integer.MAX_VALUE;
-        return (int)finalNum; 
+        return (int)(result * sign); 
     }
 }
