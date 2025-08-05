@@ -5,18 +5,22 @@ class Solution {
 
     public List<String> generateParenthesis(int n) {
         this.n = n;
-        solve(0, 0, "");
+        backtrack(0, 0, "");
         return result;    
     }
 
-    private void solve(int l, int r, String s) {
-        if (l > n || r > n || l < r) {
+    private void backtrack(int openCount, int closeCount, String currentString) {
+        if (openCount == n && closeCount == n) {
+            result.add(currentString);
             return;
         }
-        if (l == n && r == n) {
-            result.add(s);
+
+        if (openCount < n) {
+            backtrack(openCount + 1, closeCount, currentString + "(");
         }
-        solve(l + 1, r, s + "(");
-        solve(l, r + 1, s + ")");
+
+        if (closeCount < openCount) {
+            backtrack(openCount, closeCount + 1, currentString + ")");
+        }
     }
 }
