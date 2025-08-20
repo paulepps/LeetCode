@@ -19,19 +19,9 @@ class Solution {
             fast = fast.next.next;
         }
 
-        // Reverse the second half of the list
-        ListNode prev = null;
-        ListNode current = slow;
-        while (current != null) {
-            ListNode temp = current.next; // Stores the next node
-            current.next = prev; // Reverses the link
-            prev = current; // Moves prev to current node
-            current = temp; // Move to the next node in the original list
-        }
-
         // Compare the reversed second half with the first half
         ListNode firstHalf = head;
-        ListNode secondHalf = prev;
+        ListNode secondHalf = reverseList(slow);
         while (secondHalf != null) {
             // If values are different, then it's not a palindrome
             if (secondHalf.val != firstHalf.val) {
@@ -45,5 +35,17 @@ class Solution {
 
         // All values matched, so it's a palindrome
         return true;
+    }
+
+    private ListNode reverseList(ListNode current) {
+        ListNode prev = null;
+
+        while (current != null) {
+            ListNode temp = current.next; // Stores the next node
+            current.next = prev; // Reverses the link
+            prev = current; // Moves prev to current node
+            current = temp; // Move to the next node in the original list
+        }
+        return prev;
     }
 }
