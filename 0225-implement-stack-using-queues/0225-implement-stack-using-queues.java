@@ -1,13 +1,11 @@
 class MyStack {
 
-    Queue<Integer> queue1;  
-    Queue<Integer> queue2;  
-    boolean firstStack;
+    private Queue<Integer> queue1;  
+    private Queue<Integer> queue2;  
 
     public MyStack() {
         queue1 = new LinkedList<>();
         queue2 = new LinkedList<>();
-        firstStack = true;
     }
     
     public void push(int x) {
