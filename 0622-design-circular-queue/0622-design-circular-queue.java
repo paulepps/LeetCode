@@ -1,9 +1,9 @@
 class MyCircularQueue {
 
-    int[] qArray;
-    int front;
-    int rear;
-    int size;
+    private int[] qArray;
+    private int front;
+    private int rear;
+    private int size;
 
     public MyCircularQueue(int k) {
         qArray = new int[k];
