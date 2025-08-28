@@ -6,22 +6,19 @@ class Solution {
             map.put(num, map.getOrDefault(num, 0) + 1);
         }
 
-        List<Map.Entry<Integer, Integer>> entryList 
-                = new ArrayList<>(map.entrySet());
-       
-        Collections.sort(entryList, new Comparator<Map.Entry<Integer, Integer>>()
-        {
-            @Override
-            public int compare(Map.Entry<Integer, Integer> entry1, 
-                               Map.Entry<Integer, Integer> entry2) 
-            {
-                return entry2.getValue().compareTo(entry1.getValue());
+        PriorityQueue<Map.Entry<Integer, Integer>> minHeap 
+            = new PriorityQueue<>(Comparator.comparing(Map.Entry::getValue));
+
+        map.entrySet().forEach(entry -> {
+            minHeap.offer(entry);
+            if (minHeap.size() > k) {
+                minHeap.poll();
             }
         });
 
         int[] result = new int[k];
         for (int i = 0; i < k; i++) {
-            result[i] = entryList.get(i).getKey();
+            result[i] = minHeap.poll().getKey();
         }
         return result;
     }
