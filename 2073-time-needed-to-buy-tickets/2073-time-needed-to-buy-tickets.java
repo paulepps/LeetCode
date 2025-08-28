@@ -1,18 +1,20 @@
 class Solution {
     public int timeRequiredToBuy(int[] tickets, int k) {
-        int c=0 , i=0;
-        int n= tickets.length;
-        while(tickets[k]>0){
-            if(tickets[i]>0){
-                tickets[i]--;
-                c++;
+        Queue<Integer> queue = new LinkedList<>();
+        int ans = 0;
+        for(int i = 0; i < tickets.length; i++){
+            queue.add(i);
+        }
+        while(!queue.isEmpty()){
+            int index = queue.poll();
+            tickets[index]--;
+            ans++;
+            if(tickets[index] == 0 && index == k){
+                return ans;
             }
-            i++;
-            //System.out.println(c);
-            if(i==n){
-                i=0;
+            if(tickets[index] > 0){
+                queue.add(index);
             }
         }
-        return c;
-    }
+        return ans;    }
 }
