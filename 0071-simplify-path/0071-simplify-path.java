@@ -16,16 +16,14 @@ class Solution {
             }
         }
 
-        String finalPath = "";
+        StringBuilder finalPath = new StringBuilder();
         if (stack.isEmpty()) {
-            finalPath += "/";
+            finalPath.append("/");
         } else {
             for (String dir : stack) {
-                finalPath += "/";
-                finalPath += dir;
+                finalPath.append("/" + dir);
             }
         }
-        return finalPath;
+        return finalPath.toString();
     }
 };
-
