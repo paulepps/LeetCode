@@ -3,7 +3,6 @@ class Solution {
         
         s = s.replace(" ", "");
 
-        Deque<Character> opStack = new ArrayDeque<>();
         Deque<Integer> numStack = new ArrayDeque<>();
 
         char op = '+';
