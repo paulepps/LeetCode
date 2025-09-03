@@ -17,14 +17,13 @@ class Solution {
         });
 
         int count = 1;
-        int[] firstInterval = listOfArrays.get(0);
+        int firstIntervalEnd = listOfArrays.get(0)[1];
 
         for (int i = 1; i < listOfArrays.size(); i++) {
-            int[] secondInterval = listOfArrays.get(i);
-            if (firstInterval[0] > secondInterval[0] 
-                    || secondInterval[1] > firstInterval[1]) {
+            int secondIntervalEnd = listOfArrays.get(i)[1];
+            if (secondIntervalEnd > firstIntervalEnd) {
                 count++;
-                firstInterval = secondInterval;
+                firstIntervalEnd = secondIntervalEnd;
             }
         } 
         return count;
