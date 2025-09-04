@@ -1,21 +1,21 @@
 class Solution {
     public int findMinArrowShots(int[][] points) {
-        
-        Arrays.sort(points, Comparator.comparingInt(interval -> interval[1]));
+        // Sort points by their endpoint
+        Arrays.sort(points, Comparator.comparingInt(point -> point[1]));
 
-        int count = 0;
+        int end = points[0][1]; // Endpoint of the first selected balloon
+        int arrows = 1;
 
-        long prevPosition = Long.MIN_VALUE;
-
-        for (int[] interval : points) {
-            int start = interval[0];
-            int end = interval[1];
-
-            if (start > prevPosition) {
-                count++;
-                prevPosition = end;
+        for (int i = 1; i < points.length; i++) {
+            // Current balloon's start is after the previous end
+            if (points[i][0] > end) { 
+                arrows++;
+                end = points[i][1];
+            } else {
+                end = Math.min(end, points[i][1]);
             }
         }
-        return count;
+        return arrows; 
+
     }
 }
