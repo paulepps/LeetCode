@@ -27,7 +27,8 @@ class Solution {
         root.left = rightInverted;
         root.right = leftInverted;
 
-        // Return the current node (which is now the root of the inverted subtree).
+        // Return the current node (which is now the root of the 
+        // inverted subtree).
         return root;
     }
 }
