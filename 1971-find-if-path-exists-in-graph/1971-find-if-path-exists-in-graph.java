@@ -1,6 +1,6 @@
 class Solution {
 
-    // private boolean[] visited;
+    private boolean[] visited;
 
     public boolean validPath(int n, int[][] edges, int source, int destination) {
         
@@ -12,12 +12,12 @@ class Solution {
             G.addEdge(u, v);
         }
 
-        boolean[] visited = new boolean[G.V()];
+        visited = new boolean[G.V()];
 
-        return dfs(G, source, destination, visited);
+        return dfs(G, source, destination);
     }
     
-    private boolean dfs(Graph G, int v, int dest, boolean[] visited) {
+    private boolean dfs(Graph G, int v, int dest) {
 
         if (v == dest) {
             return true;
@@ -25,7 +25,7 @@ class Solution {
 
         visited[v] = true;
         for (int w : G.adj(v)) {
-            if (!visited[w] && dfs(G, w, dest, visited)) {
+            if (!visited[w] && dfs(G, w, dest)) {
                 return true;
             }
         }
