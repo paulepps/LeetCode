@@ -1,40 +1,69 @@
 class Solution {
 
+    private boolean[] visited;
+
     public boolean validPath(int n, int[][] edges, int source, int destination) {
         
-        List<List<Integer>> graph = new ArrayList<>();
+        Graph G = new Graph(n);
         
-        for (int i = 0; i < n; i++) {
-            graph.add(new ArrayList<>());
-        }
-
         for (int[] edge : edges) {
             int u = edge[0];
             int v = edge[1];
-            graph.get(u).add(v);
-            graph.get(v).add(u);
+            G.addEdge(u, v);
+            G.addEdge(v, u);
         }
 
-        boolean[] visited = new boolean[n];
+        visited = new boolean[G.V()];
 
-        return dfs(source,destination,graph,visited);
+        dfs(G, source);
+
+        return visited[destination];
     }
     
-    private boolean dfs(int node, int destination, List<List<Integer>> graph, boolean[] visited) {
+    private void dfs(Graph G, int v) {
 
-        if (node == destination) {
-            return true;
-        }
-        
-        visited[node] = true;
-        
-        for (int neighbor : graph.get(node)) {
-            if (!visited[neighbor]) {
-                if (dfs(neighbor, destination, graph, visited)) {
-                    return true;
-                }
+        visited[v] = true;
+        for (int w : G.adj(v)) {
+            if (!visited[w]) {
+                dfs(G, w);
             }
         }
-        return false;
     }
+}
+
+class Graph {
+
+    private final int V;
+    private int E;
+    private List<Integer>[] adj;
+
+    public Graph(int V) {
+        this.V = V;
+        this.E = 0;
+        adj = (List<Integer>[]) new List[V];
+        for (int v = 0; v < V; v++) {
+            adj[v] = new ArrayList<Integer>();
+        }
+    }
+
+    public int V() {
+        return V;
+    }
+
+    public int E() {
+        return E;
+    }
+
+    public void addEdge(int v, int w) {
+        E++;
+        adj[v].add(w);
+        adj[w].add(v);
+    }
+
+
+    public Iterable<Integer> adj(int v) {
+        return adj[v];
+    }
+
+
 }
