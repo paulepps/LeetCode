@@ -10,7 +10,6 @@ class Solution {
             int u = edge[0];
             int v = edge[1];
             G.addEdge(u, v);
-            G.addEdge(v, u);
         }
 
         visited = new boolean[G.V()];
