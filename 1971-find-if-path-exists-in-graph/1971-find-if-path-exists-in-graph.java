@@ -15,19 +15,22 @@ class Solution {
 
         visited = new boolean[G.V()];
 
-        dfs(G, source);
-
-        return visited[destination];
+        return dfs(G, source, destination);
     }
     
-    private void dfs(Graph G, int v) {
+    private boolean dfs(Graph G, int v, int dest) {
+
+        if (v == dest) {
+            return true;
+        } 
 
         visited[v] = true;
         for (int w : G.adj(v)) {
-            if (!visited[w]) {
-                dfs(G, w);
+            if (!visited[w] && dfs(G, w, dest)) {
+                return true;
             }
         }
+        return false;
     }
 }
 
