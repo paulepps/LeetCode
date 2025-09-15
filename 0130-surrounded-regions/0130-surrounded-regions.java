@@ -33,9 +33,8 @@ class Solution {
 
     private void dfs(int row, int col) {
         if (row < 0 || row == numRows ||
-            col < 0 || col == numCols)
-            return;
-        if (board[row][col] != 'O') 
+            col < 0 || col == numCols ||
+            board[row][col] != 'O') 
             return;
 
         board[row][col] = '.';
