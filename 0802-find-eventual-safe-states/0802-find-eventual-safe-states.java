@@ -28,11 +28,13 @@ class Solution {
 
         for (int v : graph[u]) {
             if (!dfs(v, graph, states)) {
-                return false; // If any path from a neighbor leads to a cycle, this node is not safe
+                return false; // If any path from a neighbor leads 
+                              // to a cycle, this node is not safe
             }
         }
 
-        states[u] = 2; // All paths from this node lead to terminal nodes or other safe nodes
+        states[u] = 2; // All paths from this node lead to terminal nodes 
+                       // or other safe nodes
         return true;
     }
 }
