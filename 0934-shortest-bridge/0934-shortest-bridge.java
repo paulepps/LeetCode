@@ -2,19 +2,21 @@ import java.util.LinkedList;
 import java.util.Queue;
 
 class Solution {
-    class Pos {
+    class Pair {
         int x, y;
-        Pos(int x, int y) {
+        Pair(int x, int y) {
             this.x = x;
             this.y = y;
         }
     }
 
-    boolean[][] visited;
-    Queue<Pos> q; // Queue to store cells of the first island for BFS
+    private boolean[][] visited;
+    private Queue<Pair> q; // Queue to store cells of the first island for BFS
+    private int[][] grid;
 
     public int shortestBridge(int[][] grid) {
         int n = grid.length;
+        this.grid = grid;
         visited = new boolean[n][n];
         q = new LinkedList<>();
         boolean foundFirstIsland = false;
@@ -23,7 +25,7 @@ class Solution {
         for (int i = 0; i < n; i++) {
             for (int j = 0; j < n; j++) {
                 if (grid[i][j] == 1) {
-                    dfs(grid, i, j, n);
+                    dfs(i, j, n);
                     foundFirstIsland = true;
                     break; // Only need to find one island
                 }
@@ -41,7 +43,7 @@ class Solution {
         while (!q.isEmpty()) {
             int size = q.size();
             for (int s = 0; s < size; s++) {
-                Pos p = q.poll();
+                Pair p = q.poll();
 
                 for (int k = 0; k < 4; k++) {
                     int nx = p.x + dx[k];
@@ -52,7 +54,7 @@ class Solution {
                         if (grid[nx][ny] == 1) {
                             return move; // Found the second island
                         }
-                        q.offer(new Pos(nx, ny)); // Add water cell to queue for expansion
+                        q.offer(new Pair(nx, ny)); // Add water cell to queue for expansion
                     }
                 }
             }
@@ -62,15 +64,15 @@ class Solution {
     }
 
     // DFS to mark the first island
-    private void dfs(int[][] grid, int r, int c, int n) {
-        if (r < 0 || r >= n || c < 0 || c >= n || visited[r][c] || grid[r][c] == 0) {
+    private void dfs(int r, int c, int n) {
+        if (r < 0 || r >= n || c < 0 || c >= n || visited[r][c] || this.grid[r][c] == 0) {
             return;
         }
         visited[r][c] = true;
-        q.offer(new Pos(r, c)); // Add to queue for BFS
-        dfs(grid, r + 1, c, n);
-        dfs(grid, r - 1, c, n);
-        dfs(grid, r, c + 1, n);
-        dfs(grid, r, c - 1, n);
+        q.offer(new Pair(r, c)); // Add to queue for BFS
+        dfs(r + 1, c, n);
+        dfs(r - 1, c, n);
+        dfs(r, c + 1, n);
+        dfs(r, c - 1, n);
     }
 }
