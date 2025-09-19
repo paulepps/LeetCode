@@ -17,7 +17,7 @@ class Solution {
 
     public int shortestBridge(int[][] grid) {
         this.grid = grid;
-        this.n = grid.length;
+        n = grid.length;
         visited = new boolean[n][n];
         q = new LinkedList<>();
         boolean foundFirstIsland = false;
