@@ -38,7 +38,7 @@ class Solution {
         int[] dx = {-1, 1, 0, 0}; // Directions for x-coordinate
         int[] dy = {0, 0, -1, 1}; // Directions for y-coordinate
 
-        while (!q.isEmpty()) {
+        while (true) {
             int size = q.size();
             for (int s = 0; s < size; s++) {
                 Pair p = q.poll();
@@ -58,7 +58,7 @@ class Solution {
             }
             move++; // Increment bridge length after each layer of expansion
         }
-        return -1; // Should not reach here if two islands always exist
+        // return -1; // Should not reach here if two islands always exist
     }
 
     // DFS to mark the first island
