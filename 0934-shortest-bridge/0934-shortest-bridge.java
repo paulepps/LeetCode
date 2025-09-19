@@ -11,7 +11,7 @@ class Solution {
     }
 
     private boolean[][] visited;
-    private Queue<Pair> q; // Queue to store cells of the first island for BFS
+    private Queue<Pair> q; 
     private int[][] grid;
     private int n;
 
@@ -22,17 +22,14 @@ class Solution {
         q = new LinkedList<>();
         boolean foundFirstIsland = false;
 
-        // Step 1: Find the first island using DFS and populate the queue
-        for (int i = 0; i < n; i++) {
+        // Find the first island using DFS and populate the queue
+        for (int i = 0; i < n && !foundFirstIsland; i++) {
             for (int j = 0; j < n; j++) {
                 if (grid[i][j] == 1) {
                     dfs(i, j);
                     foundFirstIsland = true;
-                    break; // Only need to find one island
+                    break; 
                 }
-            }
-            if (foundFirstIsland) {
-                break;
             }
         }
 
