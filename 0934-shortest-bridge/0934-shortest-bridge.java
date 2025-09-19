@@ -1,6 +1,3 @@
-import java.util.LinkedList;
-import java.util.Queue;
-
 class Solution {
     class Pair {
         int x, y;
@@ -33,10 +30,10 @@ class Solution {
             }
         }
 
-        // Step 2: Expand the island using BFS to find the shortest bridge
+        // Expand the island using BFS
         int move = 0;
-        int[] dx = {-1, 1, 0, 0}; // Directions for x-coordinate
-        int[] dy = {0, 0, -1, 1}; // Directions for y-coordinate
+        int[] dx = {-1, 1, 0, 0}; 
+        int[] dy = {0, 0, -1, 1}; 
 
         while (true) {
             int size = q.size();
@@ -47,27 +44,34 @@ class Solution {
                     int nx = p.x + dx[k];
                     int ny = p.y + dy[k];
 
-                    if (nx >= 0 && nx < n && ny >= 0 && ny < n && !visited[nx][ny]) {
+                    if (nx >= 0 && nx < n && 
+                            ny >= 0 && ny < n && 
+                            !visited[nx][ny]) {
                         visited[nx][ny] = true;
                         if (grid[nx][ny] == 1) {
                             return move; // Found the second island
                         }
-                        q.offer(new Pair(nx, ny)); // Add water cell to queue for expansion
+                        // Add cell to queue for expansion
+                        q.offer(new Pair(nx, ny)); 
                     }
                 }
             }
-            move++; // Increment bridge length after each layer of expansion
+            // Increment bridge length after each layer of expansion
+            move++; 
         }
-        // return -1; // Should not reach here if two islands always exist
     }
 
-    // DFS to mark the first island
     private void dfs(int r, int c) {
-        if (r < 0 || r >= n || c < 0 || c >= n || visited[r][c] || grid[r][c] == 0) {
+        if (r < 0 || r >= n || 
+            c < 0 || c >= n || 
+            visited[r][c] || grid[r][c] == 0) {
             return;
         }
+
         visited[r][c] = true;
+        
         q.offer(new Pair(r, c)); // Add to queue for BFS
+        
         dfs(r + 1, c);
         dfs(r - 1, c);
         dfs(r, c + 1);
