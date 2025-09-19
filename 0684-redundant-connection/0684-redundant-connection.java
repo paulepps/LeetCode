@@ -20,8 +20,9 @@ class UnionFind {
     private int[] rank;
 
     public UnionFind(int n) {
-        parent = new int[n+1];
-        rank = new int[n+1];
+        parent = new int[n + 1];
+        rank = new int[n + 1];
+        
         for (int i = 0; i < n; i++) {
             parent[i] = i;
             rank[i] = 0;
