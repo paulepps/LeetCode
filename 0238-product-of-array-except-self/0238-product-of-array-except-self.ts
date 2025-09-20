@@ -1,5 +1,5 @@
 function productExceptSelf(nums: number[]): number[] {
-    const: number[] answer = [];
+    const answer: number[] = [];
     let curr: number = 1;
 
     for (let i: number = 0; i < nums.length; i++) {
