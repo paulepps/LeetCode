@@ -9,7 +9,7 @@ public class Solution {
                 return new int[]{i, map[n]};
             }
             else {
-                map.Add(nums[i], i);
+                map.TryAdd(nums[i], i);
             }
         }
         // shouldn't get here
