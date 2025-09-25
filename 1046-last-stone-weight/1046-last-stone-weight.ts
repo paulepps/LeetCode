@@ -1,39 +1,39 @@
 class MyMaxHeap {
-    private heap: number[];
+    private heap;
 
     constructor() {
         this.heap = [];
     }
 
-    private parent(i: number): number {
+    private parent(i) {
         return Math.floor((i - 1) / 2);
     }
 
-    private left(i: number): number {
+    private left(i) {
         return 2 * i + 1;
     }
 
-    private right(i: number): number {
+    private right(i) {
         return 2 * i + 2;
     }
 
-    private swap(i: number, j: number): void {
+    private swap(i, j) {
         [this.heap[i], this.heap[j]] = [this.heap[j], this.heap[i]];
     }
 
-    push(val: number): void {
+    push(val) {
         this.heap.push(val);
         this.heapifyUp(this.heap.length - 1);
     }
 
-    private heapifyUp(i: number): void {
+    private heapifyUp(i) {
         while (i > 0 && this.heap[this.parent(i)] < this.heap[i]) {
             this.swap(i, this.parent(i));
             i = this.parent(i);
         }
     }
 
-    pop(): number | null {
+    pop() {
         if (this.heap.length === 0) return null;
         if (this.heap.length === 1) return this.heap.pop()!;
 
@@ -43,7 +43,7 @@ class MyMaxHeap {
         return root;
     }
 
-    private heapifyDown(i: number): void {
+    private heapifyDown(i) {
         let largest = i;
         const left = this.left(i);
         const right = this.right(i);
@@ -60,16 +60,16 @@ class MyMaxHeap {
         }
     }
 
-    peek(): number | null {
+    peek() {
         return this.heap.length > 0 ? this.heap[0] : null;
     }
 
-    size(): number {
+    size() {
         return this.heap.length;
     }
 }
 
-function lastStoneWeight(stones: number[]): number {
+function lastStoneWeight(stones) {
     const heap = new MyMaxHeap();
     for (const s of stones) {
         heap.push(s);
