@@ -1,32 +1,51 @@
 class Solution:
     def longestPalindrome(self, s: str) -> str:
+        # pointer iterate through the str
         n = len(s)
-        if n < 2:
+        max_len = 0
+        max_str = ""
+
+        # handle single char
+        if len(s) == 1:
             return s
 
-        dp = [[False] * n for _ in range(n)]
-        start = 0
-        max_len = 1
+        if len(s) == 2:
+            if s[0] == s[1]:
+                return s
+            else:
+                return s[0]
 
-        # Every single character is a palindrome
-        for i in range(n):
-            dp[i][i] = True
+        # odd length
+        for i in range(1, n-1):
+            curr_len = 1
+            left, right = i-1, i+1
+            while left >= 0 and right < n:
+                if s[left] == s[right]:
+                    left -= 1
+                    right += 1
+                    curr_len += 2
+                else:
+                    break
+            if curr_len > max_len:
+                max_len = curr_len
+                max_str = s[(left+1):right]
+                print(max_str)
 
-        # Check for two-character palindromes
-        for i in range(n - 1):
-            if s[i] == s[i + 1]:
-                dp[i][i + 1] = True
-                start = i
-                max_len = 2
 
-        # Check palindromes longer than 2 characters
-        for k in range(3, n + 1):
-            for i in range(n - k + 1):
-                j = i + k - 1
-                if dp[i + 1][j - 1] and s[i] == s[j]:
-                    dp[i][j] = True
-                    if k > max_len:
-                        start = i
-                        max_len = k
-
-        return s[start:start + max_len]
+        # even length
+        for i in range(n-1):
+            curr_len = 0
+            left, right = i, i+1
+            while left >= 0 and right < n:
+                if s[left] == s[right]:
+                    left -= 1
+                    right += 1
+                    curr_len += 2
+                else:
+                    break
+            if curr_len > max_len:
+                max_len = curr_len
+                max_str = s[(left+1):right]
+        
+        
+        return max_str
