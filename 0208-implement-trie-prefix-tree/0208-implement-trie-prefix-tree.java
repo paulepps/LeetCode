@@ -18,8 +18,7 @@ class Trie {
     public void insert(String word) {
         TrieNode current = root;
 
-        for (int i = 0; i < word.length(); i++) {
-            char c = word.charAt(i);
+        for (char c : word.toCharArray()) {
             if (current.children[c - 'a'] == null) {
                 current.children[c - 'a'] = new TrieNode();
             }
@@ -31,8 +30,7 @@ class Trie {
     public boolean search(String word) {
         TrieNode current = root;
 
-        for (int i = 0; i < word.length(); i++) {
-            char c = word.charAt(i);
+        for (char c : word.toCharArray()) {
             if (current.children[c - 'a'] == null) {
                 return false;
             }
@@ -44,8 +42,7 @@ class Trie {
     public boolean startsWith(String prefix) {
         TrieNode current = root;
 
-        for (int i = 0; i < prefix.length(); i++) {
-            char c = prefix.charAt(i);
+        for (char c : prefix.toCharArray()) {
             if (current.children[c - 'a'] == null) {
                 return false;
             }
