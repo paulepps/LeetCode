@@ -2,10 +2,10 @@ class MapSum {
 
     private Map<String, Integer> map;
     private Trie trie;
-    
+
     public MapSum() {
         map = new HashMap<>();
-        trie = new Trie();        
+        trie = new Trie();    
     }
     
     public void insert(String key, int val) {
@@ -42,13 +42,14 @@ class Trie {
         TrieNode current = root;
 
         for (char c : word.toCharArray()) {
-            if (current.children[c - 'a'] == null) {
-                current.children[c - 'a'] = new TrieNode();
+            int idx = c - 'a';
+            if (current.children[idx] == null) {
+                current.children[idx] = new TrieNode();
             }
 
-            current.children[c - 'a'].sum += val;
+            current.children[idx].sum += val;
 
-            current = current.children[c - 'a'];
+            current = current.children[idx];
         }
         current.isEndOfWord = true;
     }
@@ -57,10 +58,11 @@ class Trie {
         TrieNode current = root;
 
         for (char c : word.toCharArray()) {
-            if (current.children[c - 'a'] == null) {
+            int idx = c - 'a';
+            if (current.children[idx] == null) {
                 return false;
             }
-            current = current.children[c - 'a'];
+            current = current.children[idx];
         }
         return current.isEndOfWord;
     }
@@ -69,10 +71,11 @@ class Trie {
         TrieNode current = root;
 
         for (char c : prefix.toCharArray()) {
-            if (current.children[c - 'a'] == null) {
+            int idx = c - 'a';
+            if (current.children[idx] == null) {
                 return 0;
             }
-            current = current.children[c - 'a'];
+            current = current.children[idx];
         }
         return current.sum;
     }
