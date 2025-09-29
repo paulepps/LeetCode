@@ -19,10 +19,11 @@ class Trie {
         TrieNode current = root;
 
         for (char c : word.toCharArray()) {
-            if (current.children[c - 'a'] == null) {
-                current.children[c - 'a'] = new TrieNode();
+            int idx = c - 'a';
+            if (current.children[idx] == null) {
+                current.children[idx] = new TrieNode();
             }
-            current = current.children[c - 'a'];
+            current = current.children[idx];
         }
         current.isEndOfWord = true;
     }
@@ -31,10 +32,11 @@ class Trie {
         TrieNode current = root;
 
         for (char c : word.toCharArray()) {
-            if (current.children[c - 'a'] == null || !current.children[c - 'a'].isEndOfWord) {
+            int idx = c - 'a';
+            if (current.children[idx] == null || !current.children[c - 'a'].isEndOfWord) {
                 return false;
             }
-            current = current.children[c - 'a'];
+            current = current.children[idx];
         }
         return current.isEndOfWord;
     }
@@ -43,14 +45,16 @@ class Trie {
         TrieNode current = root;
 
         for (char c : prefix.toCharArray()) {
-            if (current.children[c - 'a'] == null) {
+            int idx = c - 'a';
+            if (current.children[idx] == null) {
                 return false;
             }
-            current = current.children[c - 'a'];
+            current = current.children[idx];
         }
         return true;
     }
 }
+
 class Solution {
     public String longestWord(String[] words) {
         Trie trie = new Trie();
