@@ -11,7 +11,7 @@ class MapSum {
     public void insert(String key, int val) {
         int currVal = map.getOrDefault(key, 0);
         map.put(key, val);
-        trie.insert(key, val, currVal);
+        trie.insert(key, val - currVal);
     }
     
     public int sum(String prefix) {
@@ -38,7 +38,7 @@ class Trie {
         root = new TrieNode();    
     }
     
-    public void insert(String word, int val, int currVal) {
+    public void insert(String word, int val) {
         TrieNode current = root;
 
         for (char c : word.toCharArray()) {
@@ -46,7 +46,7 @@ class Trie {
                 current.children[c - 'a'] = new TrieNode();
             }
 
-            current.children[c - 'a'].sum += (val - currVal);
+            current.children[c - 'a'].sum += val;
 
             current = current.children[c - 'a'];
         }
