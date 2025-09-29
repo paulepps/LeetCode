@@ -33,7 +33,7 @@ class Trie {
 
         for (char c : word.toCharArray()) {
             int idx = c - 'a';
-            if (current.children[idx] == null || !current.children[c - 'a'].isEndOfWord) {
+            if (current.children[idx] == null || !current.children[idx].isEndOfWord) {
                 return false;
             }
             current = current.children[idx];
