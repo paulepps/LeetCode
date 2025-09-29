@@ -7,60 +7,82 @@ class TrieNode {
         isEndOfWord = false;
     }
 }
-
-class WordDictionary {
+class Trie {
 
     private TrieNode root;
 
-    public WordDictionary() {
-        root = new TrieNode();
+    public Trie() {
+        root = new TrieNode();    
     }
     
-    public void addWord(String word) {
+    public void insert(String word) {
         TrieNode current = root;
 
-        for (int i = 0; i < word.length(); i++) {
-            char c = word.charAt(i);
-            int index = c - 'a';
-            if (current.children[index] == null) {
-                current.children[index] = new TrieNode();
+        for (char c : word.toCharArray()) {
+            int idx = c - 'a';
+            if (current.children[idx] == null) {
+                current.children[idx] = new TrieNode();
             }
-            current = current.children[index];
+            current = current.children[idx];
         }
         current.isEndOfWord = true;
-
     }
     
     public boolean search(String word) {
-        return searchInNode(word, root);
+        return search(word, root);
     }
 
-    private boolean searchInNode(String word, TrieNode node) {
+    private boolean search(String word, TrieNode node) {
         for (int i = 0; i < word.length(); i++) {
             char c = word.charAt(i);
 
             if (c == '.') {
                 for (TrieNode child : node.children) {
-                    if (child != null && searchInNode(word.substring(i + 1), child)) {
+                    if (child != null && search(word.substring(i + 1), child)) {
                         return true;
                     }
                 }
                 return false;
             } else {
-                int index = c - 'a';
-                if (node.children[index] == null) {
+                int idx = c - 'a';
+                if (node.children[idx] == null) {
                     return false;
                 }
-                node = node.children[index];
+                node = node.children[idx];
             }
         }
         return node.isEndOfWord;
+
+    }
+    
+    public boolean startsWith(String prefix) {
+        TrieNode current = root;
+
+        for (char c : prefix.toCharArray()) {
+            int idx = c - 'a';
+            if (current.children[idx] == null) {
+                return false;
+            }
+            current = current.children[idx];
+        }
+        return true;
     }
 }
 
-/**
- * Your WordDictionary object will be instantiated and called as such:
- * WordDictionary obj = new WordDictionary();
- * obj.addWord(word);
- * boolean param_2 = obj.search(word);
- */
+class WordDictionary {
+
+    private Trie trie;
+
+    public WordDictionary() {
+        trie = new Trie();
+    }
+    
+    public void addWord(String word) {
+        trie.insert(word);
+    }
+    
+    public boolean search(String word) {
+        return trie.search(word);
+    }
+
+}
