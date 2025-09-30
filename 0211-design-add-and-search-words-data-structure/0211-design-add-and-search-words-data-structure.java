@@ -68,7 +68,6 @@ class Trie {
         return true;
     }
 }
-
 class WordDictionary {
 
     private Trie trie;
@@ -84,5 +83,4 @@ class WordDictionary {
     public boolean search(String word) {
         return trie.search(word);
     }
-
 }
