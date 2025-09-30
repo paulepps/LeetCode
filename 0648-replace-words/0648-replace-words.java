@@ -75,7 +75,7 @@ class Trie {
             current = current.children[idx];
         }
 
-        return current.isEndOfWord ? rootWord : word;
+        return word;
     }
 }
 
