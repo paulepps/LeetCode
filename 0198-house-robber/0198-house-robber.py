@@ -17,9 +17,3 @@ class Solution:
             prev = loot
 
         return loot
-
-
-# Example usage:
-sol = Solution()
-print(sol.rob([1, 2, 3, 1]))   # Output: 4
-print(sol.rob([2, 7, 9, 3, 1])) # Output: 12
