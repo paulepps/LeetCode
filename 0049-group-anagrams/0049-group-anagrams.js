@@ -3,24 +3,15 @@
  * @return {string[][]}
  */
 var groupAnagrams = function(strs) {
-        const anagramsMap = new Map();
+    const anagramsMap = {};
 
-        for (const str of strs) {
-            const arr = str.split("");
-            arr.sort();
-
-            const sortedStr = arr.join("");
-
-            let words = anagramsMap.get(sortedStr);
-
-            if (words) {
-                words.push(str);
-            } else {
-                words = [str];
-            }
-
-            anagramsMap.set(sortedStr, words);
+    for (const word of strs) {
+        const sortedWord = word.split('').sort().join('');
+        if (!anagramsMap[sortedWord]) {
+            anagramsMap[sortedWord] = [];
         }
+        anagramsMap[sortedWord].push(word);
+    }
 
-        return [...anagramsMap.values()];
+    return Object.values(anagramsMap);
 };
