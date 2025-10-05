@@ -7,7 +7,7 @@ function generateParenthesis(n: number): string[] {
             return;
         }
 
-        if (openCount < this.n) {
+        if (openCount < n) {
             backtrack(openCount + 1, closeCount, currentString + "(");
         }
 
