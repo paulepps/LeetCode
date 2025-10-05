@@ -1,11 +1,12 @@
 function climbStairs(n: number): number {
-    if (n == 1) return 1;
-    if (n == 2) return 2;
+    let prev = 1;
+    let curr = 1;
 
-    const steps: number[] = [0,1,2];
-    for (let i: number = 3; i <= n; i++)
-        {
-            steps[i] = steps[i-2] + steps[i-1];
-        }
-    return steps[n];
-};
+    for (let i = 1; i < n; i++) {
+        const next = prev + curr;
+        prev = curr;
+        curr = next;
+    }
+
+    return curr;
+}
