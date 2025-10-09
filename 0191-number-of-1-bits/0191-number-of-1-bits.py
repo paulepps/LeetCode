@@ -1,7 +1,8 @@
 class Solution:
     def hammingWeight(self, n: int) -> int:
         count = 0
-        while n != 0:
-            n &= (n - 1)   # clear the lowest set bit
-            count += 1
+        for i in range(32):
+            if (n >> i) & 1:
+                count +=1
+                
         return count
