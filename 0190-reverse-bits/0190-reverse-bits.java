@@ -1,5 +1,5 @@
 public class Solution {
-    // you need treat n as an unsigned value
+    // you need to treat n as an unsigned value
     public int reverseBits(int n) {
         
         int res = 0;
