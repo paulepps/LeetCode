@@ -3,19 +3,27 @@ class Solution {
         
         if (x == 0) return 0;
 
-        double n = x;
-        double root;
-        double tolerance = 0.00001;
+        long n = x;
+        long lo = 1, hi = x;
+        long res = 1;
+        
+        while (lo <= hi) {
+            long mid = lo + (hi - lo) / 2;
+            
+            // if (mid * mid == x){
+            //     res = mid;
+            //     break;
+            // }
 
-        while (true) {
-            root = 0.5 * (n + (x / n));
-
-            if (Math.abs(root - n) < tolerance)
-                break;
-
-            n = root;
+            if (mid * mid <= n){
+                res = mid;
+                lo = mid + 1;
+            }
+            else {
+                hi = mid - 1;
+            }
         }
-
-        return (int)root;
+        
+        return (int)res;
     }
 }
