@@ -1,7 +1,7 @@
 class Solution {
     public int titleToNumber(String columnTitle) {
         int decimalValue = 0;
-        long power = 0; // Represents 26^0, 26^1, 26^2, etc.
+        int power = 0; // Represents 26^0, 26^1, 26^2, etc.
 
         // Iterate from the rightmost character (least significant digit)
         for (int i = columnTitle.length() - 1; i >= 0; i--) {
