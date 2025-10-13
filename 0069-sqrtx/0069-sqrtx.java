@@ -10,10 +10,10 @@ class Solution {
         while (lo <= hi) {
             long mid = lo + (hi - lo) / 2;
             
-            // if (mid * mid == x){
-            //     res = mid;
-            //     break;
-            // }
+            if (mid * mid == n){
+                res = mid;
+                break;
+            }
 
             if (mid * mid <= n){
                 res = mid;
