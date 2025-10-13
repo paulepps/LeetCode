@@ -1,17 +1,24 @@
 class Solution {
     public boolean isHappy(int n) {
-        Set<Integer> seen = new HashSet<>();
+        Set<Integer> s = new HashSet<>();
 
-        while (n != 1 && !seen.contains(n)) {
-            seen.add(n);
-
-            // Pure arithmetic: extract digits using % and / inside a stream
-            int sum = IntStream.iterate(n, x -> x > 0, x -> x / 10)
-                               .map(x -> (x % 10) * (x % 10))
-                               .sum();
-
-            n = sum;
+        while (true) {
+            n = sumSquareDigits(n);
+            if (n == 1)
+                return true;
+            if (s.contains(n))
+                return false;
+            s.add(n);
         }
+    }
 
-        return n == 1;    }
+    private int sumSquareDigits(int n) {
+        int num = 0;
+        while (n != 0) {
+            int digit = n % 10;
+            num += digit * digit;
+            n /= 10;
+        }
+        return num;
+    }
 }
