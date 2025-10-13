@@ -15,7 +15,7 @@ class Solution {
                 break;
             }
 
-            if (mid * mid <= n){
+            if (mid * mid < n){
                 res = mid;
                 lo = mid + 1;
             }
