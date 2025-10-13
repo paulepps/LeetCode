@@ -12,7 +12,7 @@ function isHappy(n: number): boolean {
     }
 
     while (true) {
-        n = this.sumSquareDigits(n);
+        n = sumSquareDigits(n);
         if (n === 1) {
             return true;
         }
