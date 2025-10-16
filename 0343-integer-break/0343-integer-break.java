@@ -6,7 +6,8 @@ class Solution {
         for (int i = 2; i <= n; i++) {
             int maxProduct = 0;
             for (int j = 1; j < i; j++) {
-                maxProduct = Math.max(maxProduct, Math.max(j * (i - j), j * dp[i - j]));
+                maxProduct = Math.max(maxProduct, 
+                                Math.max(j * (i - j), j * dp[i - j]));
             }
             dp[i] = maxProduct;
         }
