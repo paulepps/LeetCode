@@ -4,22 +4,20 @@ class Solution {
         if (s1.length() + s2.length() != s3.length())
             return false;
 
-        int[][] memo = new int[s1.length() + 1][s2.length() + 1];
-        for(int[] row : memo) {
-            Arrays.fill(row, -1);
-        }
+        Boolean[][] memo = new Boolean[s1.length() + 1][s2.length() + 1];
+
         return isInterleaveRec(s1, s2, s3, 0, 0, memo);
     }
 
-    private boolean isInterleaveRec(String s1, String s2, String s3, int i, int j, int[][] memo) {
+    private boolean isInterleaveRec(String s1, String s2, String s3, int i, int j, Boolean[][] memo) {
         
         int k = i + j;
       
         if (i == s1.length() && j == s2.length() && k == s3.length()) 
             return true;    
 
-        if (memo[i][j] != -1) {
-            return memo[i][j] == 1;
+        if (memo[i][j] != null) {
+            return memo[i][j] == true;
         }
 
         boolean b1 = false;
@@ -30,7 +28,7 @@ class Solution {
         if (j < s2.length() && s3.charAt(k) == s2.charAt(j))
             b2 = isInterleaveRec(s1, s2, s3, i, j + 1, memo);
         
-        memo[i][j] = b1 || b2 ? 1 : 0;
+        memo[i][j] = b1 || b2;
         return b1 || b2;
     }
 }
