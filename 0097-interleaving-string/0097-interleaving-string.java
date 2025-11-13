@@ -1,34 +1,36 @@
 class Solution {
     public boolean isInterleave(String s1, String s2, String s3) {
         
-        if (s1.length() + s2.length() != s3.length())
+        int m = s1.length();
+        int n = s2.length();
+
+        if (m + n != s3.length()) {
             return false;
-
-        Boolean[][] memo = new Boolean[s1.length() + 1][s2.length() + 1];
-
-        return isInterleaveRec(s1, s2, s3, 0, 0, memo);
-    }
-
-    private boolean isInterleaveRec(String s1, String s2, String s3, int i, int j, Boolean[][] memo) {
-        
-        int k = i + j;
-      
-        if (i == s1.length() && j == s2.length() && k == s3.length()) 
-            return true;    
-
-        if (memo[i][j] != null) {
-            return memo[i][j] == true;
         }
 
-        boolean b1 = false;
-        if (i < s1.length() && s3.charAt(k) == s1.charAt(i))
-            b1 = isInterleaveRec(s1, s2, s3, i + 1, j, memo);
+        boolean[][] dp = new boolean[m + 1][n + 1];
 
-        boolean b2 = false;
-        if (j < s2.length() && s3.charAt(k) == s2.charAt(j))
-            b2 = isInterleaveRec(s1, s2, s3, i, j + 1, memo);
-        
-        memo[i][j] = b1 || b2;
-        return b1 || b2;
+        // Base case: empty strings interleave to form an empty string
+        dp[0][0] = true;
+
+        // Fill the first row (interleaving s1 with an empty s2)
+        for (int i = 1; i <= m; i++) {
+            dp[i][0] = dp[i - 1][0] && (s1.charAt(i - 1) == s3.charAt(i - 1));
+        }
+
+        // Fill the first column (interleaving s2 with an empty s1)
+        for (int j = 1; j <= n; j++) {
+            dp[0][j] = dp[0][j - 1] && (s2.charAt(j - 1) == s3.charAt(j - 1));
+        }
+
+        // Fill the rest of the DP table
+        for (int i = 1; i <= m; i++) {
+            for (int j = 1; j <= n; j++) {
+                dp[i][j] = (dp[i - 1][j] && (s1.charAt(i - 1) == s3.charAt(i + j - 1))) ||
+                           (dp[i][j - 1] && (s2.charAt(j - 1) == s3.charAt(i + j - 1)));
+            }
+        }
+
+        return dp[m][n];
     }
 }
