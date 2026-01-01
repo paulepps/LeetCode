@@ -15,7 +15,7 @@ class Solution {
         return stack.isEmpty();
     }
 
-    boolean match(char left, char right) {
+    private boolean match(char left, char right) {
         return (left == '(' && right == ')') ||
                (left == '{' && right == '}') ||
                (left == '[' && right == ']');
