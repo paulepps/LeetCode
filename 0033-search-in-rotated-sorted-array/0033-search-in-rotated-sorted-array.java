@@ -20,7 +20,7 @@ class Solution {
             } else {
                 return binarySearch(nums, mid+1, hi, target);
             }
-        } else { // right half is sorted
+        } else { // right half is sortedz
             if(nums[mid] < target && target <= nums[hi]) {
                 return binarySearch(nums, mid+1, hi, target);
             } else {
