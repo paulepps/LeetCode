@@ -4,7 +4,7 @@ class Solution {
         int totalGaining = 0;
         int candidate = 0;
         
-        for(int i= 0; i < gas.length; i++) {
+        for(int i = 0; i < gas.length; i++) {
             
             currentGaining += gas[i] - cost[i];
             totalGaining += gas[i] - cost[i];
