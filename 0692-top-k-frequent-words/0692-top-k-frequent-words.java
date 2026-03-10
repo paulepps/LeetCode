@@ -1,22 +1,32 @@
 class Solution {
     public List<String> topKFrequent(String[] words, int k) {
-                Map<String, Integer> freq = new HashMap<>();
+        Map<String, Integer> freq = new HashMap<>();
         for (String w : words) {
             freq.put(w, freq.getOrDefault(w, 0) + 1);
         }
 
-        List<String> candidates = new ArrayList<>(freq.keySet());
-
-        // Sort by: frequency desc, then word asc
-        Collections.sort(candidates, (w1, w2) -> {
+        // Min-heap: worst candidate on top
+        PriorityQueue<String> pq = new PriorityQueue<>((w1, w2) -> {
             int f1 = freq.get(w1);
             int f2 = freq.get(w2);
             if (f1 != f2) {
-                return Integer.compare(f2, f1); // higher freq first
+                return Integer.compare(f1, f2); // lower freq first
             }
-            return w1.compareTo(w2);            // lexicographically smaller first
+            return w2.compareTo(w1);            // lexicographically larger first
         });
 
-        return candidates.subList(0, k);
+        for (String word : freq.keySet()) {
+            pq.offer(word);
+            if (pq.size() > k) {
+                pq.poll(); // remove worst candidate
+            }
+        }
+
+        List<String> result = new ArrayList<>();
+        while (!pq.isEmpty()) {
+            result.add(pq.poll());
+        }
+        Collections.reverse(result); // heap gives lowest-first, reverse to highest-first
+        return result;
     }
 }
